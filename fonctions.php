@@ -1,8 +1,8 @@
 <?php
-function stringSani ($filtredvar) {
-	$filtredvar = filter_var($filtredvar,FILTER_SANITIZE_STRING);
-	return $filtredvar;
+function pr($array){
+	echo "<pre>";
+	print_r($array);
+	echo "</pre>";
 }
-
 
 ?>

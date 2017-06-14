@@ -1,34 +1,14 @@
 <?php
+include "fonctions.php";
 
-
-if(isset($_POST['submit'])){
-	//sanitisation 
-	$saniToDo = filter_var($_POST['toDo'],FILTER_SANITIZE_STRING);
-
-	//Validation
-	if(!empty($saniToDo)) {	
-		$form_data = Array(
-			"name" => $saniToDo,
-			"value" => false
-		);
-
-		$file = "todo.json"; //On met le chemin de json ds une variable 
-		$open_file = file_get_contents($file); //On récupere l'interieur du fivhier
-		$decode_file = json_decode($open_file, true); // On le transforme en array
-		array_push($decode_file, $form_data); //On push dans cet array ce que l'user veut mettre
-		$Json_edit_file = json_encode($decode_file, JSON_PRETTY_PRINT); // On le recode en language JSON
-
-		file_put_contents($file, $Json_edit_file); //On sauvegarde les changements dans le fichier json
-		
-	} else {
-		echo "Veuillez remplir le champ salapard";
-	}
+if(isset($_POST['submit'])) { //isset = si le bouton submit et appuyé alors le code s'execute
+	include "ecrire-JSON.php";
+	//On va rechercher $tachesEncode Il faut d'abord récuperer ce qu'il y a dans todo.json avant json_decode 
+	$stock_json_decode = json_decode($taches_encode); //transformer json en language php !!!! en array avec des objets à l'intérieur
+ 	//pr($stock_json_decode);
+ 	
 }
-echo "<pre>";
-print_r($decode_file);
-echo "</pre>";
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,12 +17,30 @@ echo "</pre>";
 	<title>to do list</title>
 </head>
 <body>
+	<section>
+		<h2>A faire:</h2>
+		<form>
+		<?php
+		//Elle ajoute toutes les tâches au fur et à mesure et elle crée un label et input par rapport aux nombres d'objets dans le tableau
+		foreach ($stock_json_decode as $key => $objets) {
+			echo $objets-> Afaire;
+		
+		
+		?>
+			<label for="TachesAFaire"></label>
+			<input type="checkbox" name="TachesAFaire" id="TachesAFaire"><br>
+
+		
+		<?php
+		}
+		?>
+			<input type="submit" name="save" value="enregistrer"><br>
+		</form>
+	</section>
 	<form action="" method="POST">
-		<input type="text" name="toDo">
+		<input type="text" name="taches">
 		<input type="submit" name="submit">
 	</form>
-
-
-
 </body>
 </html>
+
