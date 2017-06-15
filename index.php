@@ -1,13 +1,6 @@
 <?php
 include "fonctions.php";
-
-if(isset($_POST['submit'])) { //isset = si le bouton submit et appuyé alors le code s'execute
-	include "ecrire-JSON.php";
-	//On va rechercher $tachesEncode Il faut d'abord récuperer ce qu'il y a dans todo.json avant json_decode 
-	$stock_json_decode = json_decode($taches_encode); //transformer json en language php !!!! en array avec des objets à l'intérieur
- 	//pr($stock_json_decode);
- 	
-}
+include "ecrire-JSON.php";
 ?>
 
 <!DOCTYPE html>
@@ -19,21 +12,8 @@ if(isset($_POST['submit'])) { //isset = si le bouton submit et appuyé alors le 
 <body>
 	<section>
 		<h2>A faire:</h2>
-		<form>
-		<?php
-		//Elle ajoute toutes les tâches au fur et à mesure et elle crée un label et input par rapport aux nombres d'objets dans le tableau
-		foreach ($stock_json_decode as $key => $objets) {
-			echo $objets-> Afaire;
-		
-		
-		?>
-			<label for="TachesAFaire"></label>
-			<input type="checkbox" name="TachesAFaire" id="TachesAFaire"><br>
+		<form action="" method="POST">
 
-		
-		<?php
-		}
-		?>
 			<input type="submit" name="save" value="enregistrer"><br>
 		</form>
 	</section>
@@ -44,3 +24,14 @@ if(isset($_POST['submit'])) { //isset = si le bouton submit et appuyé alors le 
 </body>
 </html>
 
+<?php
+if(isset($_POST['submit'])) {
+	$tacheSanitise = filter_var($_POST['taches']);
+	if(!empty($tacheSanitise)) {
+		$file = 'todo.json';
+		ecrire_dans_JSON($tacheSanitise, $file);
+	}else {
+		echo "Veuillez mettre une tâche à faire";
+	}
+}
+?>
