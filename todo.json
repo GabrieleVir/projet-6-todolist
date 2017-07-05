@@ -1,10 +1,37 @@
 [
     {
-        "name": "dssd",
-        "value": false
+        "id": 0,
+        "name": "Test 1",
+        "value": true
     },
     {
-        "name": "bien cela fonctionne",
-        "value": false
+        "id": 1,
+        "name": "Test 2",
+        "value": true
+    },
+    {
+        "id": 2,
+        "name": "Test 3",
+        "value": true
+    },
+    {
+        "id": 3,
+        "name": "Test 4",
+        "value": true
+    },
+    {
+        "id": 4,
+        "name": "Test 5",
+        "value": true
+    },
+    {
+        "id": 5,
+        "name": "Test 5",
+        "value": true
+    },
+    {
+        "id": 6,
+        "name": "Test 6",
+        "value": true
     }
 ]
